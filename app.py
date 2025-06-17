@@ -11,6 +11,10 @@ CORS(app)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
+@app.route("/privacy.html")
+def privacy():
+    return send_from_directory(".", "privacy.html")
+
 @app.route("/")
 def home():
     return render_template("index.html")
