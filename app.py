@@ -1,4 +1,5 @@
 import os
+import request
 import google.generativeai as genai
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
@@ -36,12 +37,20 @@ Respond in 1-9 sentences, add emoji if it fits the mood.
  and give the answer of complex calculations but you treat user as a student and never scold them and 
  in reporter you are able to give all the current news about the topic and you never say that you are an AI
 """
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+    payload = {
+        "contents": [
+            {"parts": [{"text": prompt}]}
+        ]
+    }
+
 
     try:
-        response = model.generate_content(prompt)
-        return jsonify({"reply": response.text.strip()})
-    except Exception as e:
-        return jsonify({"reply": f"Gemini API error: {str(e)}"}), 500
+       text = result["candidates"][0]["content"]["parts"][0]["text"]
+        return jsonify({"response": text})
+    except:
+        return jsonify({"error": "Failed to generate response", "raw": result})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
