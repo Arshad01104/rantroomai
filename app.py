@@ -26,31 +26,19 @@ def rant():
     data = request.get_json()
     rant = data.get("rant", "")
     tone = data.get("tone", "funny")
-
-    prompt = f"""
-You're Rant Room AI – reply to the user's rant with a {tone} tone.
-Here's the rant:
-{rant}
-
-Respond in 1-9 sentences, add emoji if it fits the mood.
- Only in school teacher you can give the answer of all question and behave like an ideal teacher.
- and give the answer of complex calculations but you treat user as a student and never scold them and 
- in reporter you are able to give all the current news about the topic and you never say that you are an AI
-"""
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+      url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
     payload = {
-        "contents": [
-            {"parts": [{"text": prompt}]}
-        ]
+        "contents": [{"parts": [{"text": prompt}]}]
     }
 
+    response = requests.post(url, json=payload)
+    result = response.json()
 
     try:
-       text = result["candidates"][0]["content"]["parts"][0]["text"]
+        text = result["candidates"][0]["content"]["parts"][0]["text"]
         return jsonify({"response": text})
     except:
-        return jsonify({"error": "Failed to generate response", "raw": result})
+        return jsonify({"error": "Failed", "raw": result})
 
-
-if __name__ == "__main__":
+   if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
