@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -13,7 +13,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 @app.route("/")
 def home():
-    return "<h1>Rant Room AI is Running</h1>"
+    return render_template("index.html")
 
 @app.route("/rant", methods=["POST"])
 def handle_rant():
