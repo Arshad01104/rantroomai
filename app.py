@@ -26,7 +26,7 @@ def rant():
     data = request.get_json()
     rant = data.get("rant", "")
     tone = data.get("tone", "funny")
-      url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+   url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
     payload = {
         "contents": [{"parts": [{"text": prompt}]}]
     }
@@ -36,7 +36,7 @@ def rant():
 
     try:
         text = result["candidates"][0]["content"]["parts"][0]["text"]
-        return jsonify({"response": text})
+        return jsonify({"response": text})    
     except:
         return jsonify({"error": "Failed", "raw": result})
 
