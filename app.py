@@ -11,8 +11,9 @@ CORS(app)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-@app.route("/generate", methods=["POST"])
-def generate_text():
+@app.route("/")
+def home():
+    return render_template("index.html")
     data = request.get_json()
     prompt = data.get("prompt")
 
