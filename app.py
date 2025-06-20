@@ -21,6 +21,16 @@ def home():
 def privacy():
     return send_from_directory(".", "privacy.html")
 
+# Serve about.html from root directory
+@app.route("/about.html")
+def privacy():
+    return send_from_directory(".", "about.html")
+
+# Serve contact.html from root directory
+@app.route("/contact.html")
+def privacy():
+    return send_from_directory(".", "contact.html")
+
 # Handle AI-powered rant response
 @app.route("/rant", methods=["POST"])
 def handle_rant():
