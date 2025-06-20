@@ -31,6 +31,11 @@ def about():
 def contact():
     return send_from_directory(".", "contact.html")
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('static', 'sitemap.xml')
+
+
 # Handle AI-powered rant response
 @app.route("/rant", methods=["POST"])
 def handle_rant():
