@@ -23,12 +23,12 @@ def privacy():
 
 # Serve about.html from root directory
 @app.route("/about.html")
-def privacy():
+def about():
     return send_from_directory(".", "about.html")
 
 # Serve contact.html from root directory
 @app.route("/contact.html")
-def privacy():
+def contact():
     return send_from_directory(".", "contact.html")
 
 # Handle AI-powered rant response
