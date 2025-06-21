@@ -35,7 +35,7 @@ def contact():
 def sitemap():
     return send_from_directory('static', 'sitemap.xml')
 
-@app.route('/examples.html')
+@app.route("/examples.html")
 def examples():
     return send_from_directory(".", "examples.html")
 
