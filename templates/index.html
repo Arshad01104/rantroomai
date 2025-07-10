@@ -2,31 +2,24 @@
 <html lang="en">
 <head>
 <meta name="google-site-verification" content="CY0QEgBK3oEp1bO-HXpJk2mgLwLJIvp0GaeVUjBi5y4" />
-    <!-- ✅ SEO Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rant Room AI</title>
     <meta name="description" content="Use Rant Room AI to express your feelings. Generate fun, anonymous rants powered by AI.">
     <meta name="keywords" content="rant room ai, ai rant generator, roast me ai, funny ai, ai text, rant room">
     <meta name="author" content="XYLO">
-
-    <!-- ✅ Open Graph for Social Sharing -->
     <meta property="og:title" content="Rant Room AI">
     <meta property="og:description" content="Let the AI rant for you in a fun and anonymous way.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.rantroomai.space"> <!-- Change to your domain -->
-    <meta property="og:image" content="https://rantroomai.space/C:\Users\Acer\Downloads\rant.png"> <!-- Optional preview image -->
-
-    <!-- ✅ Twitter Card -->
+    <meta property="og:url" content="https://www.rantroomai.space">
+    <meta property="og:image" content="https://rantroomai.space/C:\Users\Acer\Downloads\rant.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rant Room AI">
     <meta name="twitter:description" content="AI-powered rants in a fun and savage way.">
 
-    <!-- ✅ Google AdSense Auto Ads -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-        crossorigin="anonymous"></script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9676437891500869"
+     crossorigin="anonymous"></script>
 
-    <!-- ✅ Existing Styles (Unchanged) -->
     <style>
         body.dark {
             background: #111;
@@ -49,6 +42,12 @@
             background-color: #1e1e1e;
             color: #f1f1f1;
             border: 1px solid #444;
+        }
+
+        body.dark .glow-container {
+            background-color: #fff;
+            box-shadow: 0 0 30px 5px rgba(0, 0, 0, 1);
+            color: #111;
         }
 
         #darkToggle {
@@ -78,6 +77,16 @@
             background: #f7f7f7;
         }
 
+        .glow-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
+            color: #111;
+        }
+
         textarea {
             width: 100%;
             max-width: 500px;
@@ -98,7 +107,7 @@
 
         button {
             cursor: pointer;
-            background-color: #04AF50;
+            background-color: #222;
             color: white;
             border: none;
             margin-left: 10px;
@@ -118,35 +127,35 @@
     </style>
 </head>
 
-<button id="darkToggle" title="Toggle dark mode">🌓</button>
-
 <body>
-    <h1>Rant Room AI</h1>
-    <h2>"Know how your people react when they listen this..."*</h2>
-<h3>What is Rant Room AI?</h3>
-<p>Rant Room AI is an innovative tool that lets you express your thoughts, stress, or anger in a fun and creative way. Just type your rant, select a tone, and let the AI deliver it with humor, seriousness, or even as a savage roast!</p>
-<p>This app is built to help users vent out safely and anonymously while having fun with AI-powered responses. Whether you're bored or frustrated, Rant Room AI is here for you.</p>
-<h4>Why We Built Rant Room AI?</h4>
-<p>Sometimes people need to vent or share how they feel, but they don't want to do it publicly. Rant Room AI gives users a private, anonymous, and fun space to let it out with no judgment — just AI creativity.</p>
+    <button id="darkToggle" title="Toggle dark mode">🌓</button>
 
+    <div class="glow-container">
+        <h1>Rant Room AI</h1>
+        <h2>"Know how your people react when they listen this..."*</h2>
+        <h3>What is Rant Room AI?</h3>
+        <p>Rant Room AI is an innovative tool that lets you express your thoughts, stress, or anger in a fun and creative way. Just type your rant, select a tone, and let the AI deliver it with humor, seriousness, or even as a savage roast!</p>
+        <p>This app is built to help users vent out safely and anonymously while having fun with AI-powered responses. Whether you're bored or frustrated, Rant Room AI is here for you.</p>
+        <h4>Why We Built Rant Room AI?</h4>
+        <p>Sometimes people need to vent or share how they feel, but they don't want to do it publicly. Rant Room AI gives users a private, anonymous, and fun space to let it out with no judgment — just AI creativity.</p>
 
+        <textarea id="rant" placeholder="Type your rant here..."></textarea><br>
 
-    <textarea id="rant" placeholder="Type your rant here..."></textarea><br>
+        <select id="tone">
+            <option value="best_friend">Best Friend</option>
+            <option value="savage">Savage(roaster)</option>
+            <option value="zen_monk">Zen Monk</option>
+            <option value="therapist">Therapist</option>
+            <option value="teacher">School Teacher</option>
+            <option value="reporter">Reporter</option>
+        </select>
 
-    <select id="tone">
-        <option value="best_friend">Best Friend</option>
-        <option value="savage">Savage(roaster)</option>
-        <option value="zen_monk">Zen Monk</option>
-        <option value="therapist">Therapist</option>
-        <option value="teacher">School Teacher</option>
-        <option value="reporter">Reporter</option>
-    </select>
+        <button onclick="sendRant()">Send Rant</button>
+        <button id="clearButton" style="margin-left: 10px;">Clear Rant</button>
 
-    <button onclick="sendRant()">Send Rant</button>
-    <button id="clearButton" style="margin-left: 10px;">Clear Rant</button>
-
-    <h3>AI Reply:</h3>
-    <div id="reply"></div>
+        <h3>AI Reply:</h3>
+        <div id="reply"></div>
+    </div>
 
     <script>
         const toggleBtn = document.getElementById('darkToggle');
@@ -196,9 +205,9 @@
         <p>
             Made by <strong>XYLO</strong><br>
             <a href="/privacy.html" target="_blank" style="color: gray; text-decoration: underline;">Privacy Policy</a> |
- <a href="/about.html" target="_blank" style="color: gray; text-decoration: underline;">About</a> |
-    <a href="/contact.html" target="_blank" style="color: gray; text-decoration: underline;">Contact</a>|
- <a href="/examples.html" target="_blank" style="color: gray; text-decoration: underline;">Examples</a>
+            <a href="/about.html" target="_blank" style="color: gray; text-decoration: underline;">About</a> |
+            <a href="/contact.html" target="_blank" style="color: gray; text-decoration: underline;">Contact</a> |
+            <a href="/examples.html" target="_blank" style="color: gray; text-decoration: underline;">Examples</a>
         </p>
     </footer>
 </body>
