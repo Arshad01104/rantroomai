@@ -36,6 +36,10 @@ def sitemap():
 def examples():
     return send_from_directory(".", "examples.html")
 
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory(".", "robots.txt")
+
 # Handle AI-powered rant response
 @app.route("/rant", methods=["POST"])
 def handle_rant():
