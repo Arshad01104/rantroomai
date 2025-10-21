@@ -11,22 +11,19 @@ CORS(app)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Serve main page
+# Serve main page etc
 @app.route("/")
 def home():
     return render_template("index.html")
 
-# Serve privacy.html from root directory
 @app.route("/privacy.html")
 def privacy():
     return send_from_directory(".", "privacy.html")
 
-# Serve about.html from root directory
 @app.route("/about.html")
 def about():
     return send_from_directory(".", "about.html")
 
-# Serve contact.html from root directory
 @app.route("/contact.html")
 def contact():
     return send_from_directory(".", "contact.html")
@@ -38,8 +35,6 @@ def sitemap():
 @app.route("/examples.html")
 def examples():
     return send_from_directory(".", "examples.html")
-
-
 
 # Handle AI-powered rant response
 @app.route("/rant", methods=["POST"])
@@ -59,20 +54,38 @@ def handle_rant():
 
     prompt = prompts.get(tone, f"Reply to this rant: '{rant}'")
 
-    # Gemini 1.5 Flash API call
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+    # Use Gemini 2.0 Flash Experimental API endpoint
+    url = ("https://generativelanguage.googleapis.com/v1beta/"
+           "models/gemini-2.0-flash-exp:generateContent?key=" + GEMINI_API_KEY)
+
     payload = {
-        "contents": [{"parts": [{"text": prompt}]}]
+        "contents": [
+            {
+                "parts": [
+                    {"text": prompt}
+                ]
+            }
+        ],
+        # You can optionally add generationConfig for temperature, etc
+        "generationConfig": {
+            "temperature": 0.7,
+            "maxOutputTokens": 256
+        }
     }
 
     response = requests.post(url, json=payload)
     result = response.json()
 
     try:
+        # The response format: candidates → content → parts → text
         text = result["candidates"][0]["content"]["parts"][0]["text"]
         return jsonify({"reply": text})
-    except:
-        return jsonify({"reply": "❌ Gemini could not process the request.", "error": result})
+    except Exception as e:
+        return jsonify({
+            "reply": "❌ Gemini could not process the request.",
+            "error": result,
+            "exception": str(e)
+        }), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
