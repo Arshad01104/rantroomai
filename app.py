@@ -86,7 +86,7 @@ def handle_rant():
         return jsonify({"reply": text})
     except Exception as e:
         return jsonify({
-            "reply": "Sorry but we will back soon 😊 you can visit for us on <a href="https://venty-creation.onrender.com">Here</a>. ",
+            "reply": "Sorry but we will back soon 😊 ",
             "error": result,
             "exception": str(e)
         }), 500
